@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:abeermdrsty/constant/drawer/custom_list_tile.dart';
 import 'package:abeermdrsty/utility/shared.dart';
 import 'package:abeermdrsty/view/teacher/book.dart';
 import 'package:abeermdrsty/view/teacher/components/drawer/bottom_user_info.dart';
 import 'package:abeermdrsty/constant/drawer/header.dart';
-import 'package:abeermdrsty/view/teacher/notesteachers.dart';
+
 import 'package:abeermdrsty/view/teacher/tabbar/classtab/desctutionT/tdescution.dart';
 import 'package:abeermdrsty/view/teacher/tabbar/classtab/diaryclass/diaryclass.dart';
 import 'package:abeermdrsty/view/teacher/tabbar/classtab/grads/grads.dart';
@@ -14,6 +15,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../attendteacher.dart';
+import '../../report.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -129,7 +131,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         type: PageTransitionType.leftToRight,
                         duration: Duration(milliseconds: 600),
                         reverseDuration: Duration(microseconds: 600),
-                        child: notesteachers(),
+                        child: ReportPage(),
                       ));
                     },
                     isTabSelected: _selectedTabIndex == 1,

@@ -16,7 +16,7 @@ class attendteacher extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           appBar: appbarchild(title: "الحضور"),
-          drawer: CustomDrawer(),
+        
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: MyCard(),

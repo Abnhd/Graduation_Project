@@ -1,9 +1,10 @@
 
 
+import 'package:abeermdrsty/view/teacher/report.dart';
 import 'package:flutter/material.dart';
 import 'package:abeermdrsty/view/supervisor/component/drawer/custom_drawer.dart';
 import 'package:abeermdrsty/view/supervisor/tabs/addnotivication.dart';
-import 'package:abeermdrsty/view/teacher/notesteachers.dart';
+
 import 'package:abeermdrsty/view/teacher/tabbar/test.dart';
 
 class drawer extends StatefulWidget {
@@ -45,7 +46,7 @@ class tabcontent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (currentTabIndex == 0) {
-      return notesteachers();
+      return ReportPage();
     } 
     else {
       // Add more conditions for additional tabs

@@ -2,6 +2,9 @@
 
 import 'dart:io';
 
+
+import 'package:abeermdrsty/view/teacher/report.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:abeermdrsty/loadpage.dart';
@@ -23,6 +26,10 @@ import 'login.dart';
 
 import 'utility/shared.dart';
 import 'view/parent/bottomnav.dart';
+
+import 'view/teacher/tabbar/classtab/desctutionT/tdescution.dart';
+import 'view/teacher/tabbar/classtab/diaryclass/diaryclass.dart';
+import 'view/teacher/tabbar/classtab/questionfromstudents/question.dart';
 
 // class MyHttpOverrides extends HttpOverrides{
 //   @override
@@ -57,6 +64,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           
           debugShowCheckedModeBanner: false,
+        
         
           home:tabsbutton(),
         ));  

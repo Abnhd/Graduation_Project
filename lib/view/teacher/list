@@ -1,0 +1,9 @@
+class Notificationsupervisor {
+  final String title;
+  final String content;
+
+  Notificationsupervisor({
+    required this.title,
+    required this.content,
+  });
+}

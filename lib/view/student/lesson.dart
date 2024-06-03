@@ -4,6 +4,7 @@ import 'package:abeermdrsty/constant/appbarchild.dart';
 import 'package:abeermdrsty/constant/fontstyle.dart';
 import 'package:abeermdrsty/style/list.dart';
 import 'package:abeermdrsty/view/student/components/drawer/custom_drawer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class lesson extends StatefulWidget {
   @override
@@ -19,12 +20,21 @@ class _lessonState extends State<lesson> {
     });
   }
 
+  final String videoUrl = 'https://www.youtube.com/watch?v=exampleVideoId';
+  void launchUrl(String url) async {
+    if (!await canLaunchUrl(Uri.parse(url))) {
+      throw 'Could not launch $url';
+    }
+    // ignore: deprecated_member_use
+    await launch(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     // Filtered notifications based on search text
     final filteredNotifications = less
-        .where((notification) =>
-            _searchText.isEmpty || notification.titile.contains(_searchText))
+        .where((lesson) =>
+            _searchText.isEmpty || lesson.titile.contains(_searchText))
         .toList();
 
     return Directionality(
@@ -153,55 +163,45 @@ class _lessonState extends State<lesson> {
                                         padding: const EdgeInsets.all(20),
                                         child: Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              CrossAxisAlignment.center,
                                           children: [
                                             Text(
-                                              notifi.titile,
-                                              style: fontstyle.fontheading,
+                                              " الدرس:${notifi.titile}",
+                                              style: fonttitlestyle.fonttitle,
                                             ),
-                                            SizedBox(height: 15),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    Colors.indigo.shade400,
-                                                    Colors.blue.shade400,
-                                                    Colors.indigo.shade800,
-                                                  ],
-                                                ),
-                                                shape: BoxShape.rectangle,
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(10)),
-                                              ),
-                                              child: Card(
-                                                color: Colors.white,
-                                                elevation: 4,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      16.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        notifi.content,
-                                                        style: TextStyle(
-                                                          color: Colors.blue,
-                                                          fontSize: 16,
-                                                        ),
-                                                      ),
-                                                    ],
+                                            Divider(
+                                              height: 2,
+                                              thickness: 2,
+                                            ),
+                                            Text(notifi.content,
+                                                style:
+                                                    fonttitlestyle.fonttitle,
+                                                    textAlign: TextAlign.center,),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(16.0),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  ElevatedButton(
+                                                    onPressed: () => launchUrl(
+                                                        videoUrl), // Open YouTube link
+                                                    child: const Text('يوتيوب'),
                                                   ),
-                                                ),
+                                                  ElevatedButton(
+                                                    onPressed: () {},
+                                                    // Open YouTube link
+                                                    child:
+                                                        const Text('عرض ملف'),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ],

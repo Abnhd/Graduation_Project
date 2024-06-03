@@ -294,26 +294,32 @@ List<clase> clas = [
 class lesson {
   final String name;
   final String titile;
+
   final String content;
+  
   final String data;
 
   lesson(
       {required this.titile,
       required this.content,
+    
       required this.name,
       required this.data});
 }
 
-List<notivication> less = [
-  notivication(
+List<lesson> less = [
+  lesson(
       titile: "التكامل",
+    
+
       content:
-        "https://madrsty.com",
+        "شرح الدرس",
       name: 'غلا بن بشر',
       data: "2/2/2024"),
-  notivication(
+  lesson(
       titile: " الضرب",
-      content: "https://madrsty.com",
+      
+      content:  "شرح الدرس",
       name: 'غلا بن بشر',
       data: "2/2/2024"),
 ];

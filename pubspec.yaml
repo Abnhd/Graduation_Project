@@ -47,6 +47,7 @@ dependencies:
   flutter_pdfview: ^1.2.2
   dio: ^4.0.0
   image_picker: ^0.8.5
+  url_launcher: ^6.1.2
 
 dev_dependencies:
   flutter_test:

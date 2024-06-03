@@ -3,6 +3,7 @@
 import 'dart:io';
 
 
+import 'package:abeermdrsty/view/student/lesson.dart';
 import 'package:abeermdrsty/view/teacher/report.dart';
 
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
         
         
-          home:tabsbutton(),
+          home:lesson(),
         ));  
   } 
 

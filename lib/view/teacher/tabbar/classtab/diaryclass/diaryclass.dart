@@ -8,6 +8,7 @@ import 'package:abeermdrsty/view/teacher/components/drawer/custom_drawer.dart';
 import 'package:abeermdrsty/view/teacher/tabbar/classtab/homeworknotification/viewhw.dart';
 import 'package:abeermdrsty/view/teacher/tabbar/test.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class diary extends StatefulWidget {
   @override
@@ -56,7 +57,14 @@ class _diaryState extends State<diary> {
       notifications.removeAt(index);
     });
   }
-
+final String videoUrl = 'https://www.youtube.com/watch?v=exampleVideoId';
+  void launchUrl(String url) async {
+    if (!await canLaunchUrl(Uri.parse(url))) {
+      throw 'Could not launch $url';
+    }
+    // ignore: deprecated_member_use
+    await launch(url);
+  }
   void _showAddNotificationDialog(
       {Map<String, dynamic>? notification, int? index}) {
     showModalBottomSheet<void>(
@@ -116,94 +124,111 @@ class _diaryState extends State<diary> {
                       height: 15,
                     ),
                     Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        elevation: 4, // Remove card elevation
-                        color: Colors.white, // Transparent card background
-                        child: Column(
-                          children: [
-                            ListTile(
+                        padding: EdgeInsets.all(10),
+                        child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            elevation: 4, // Remove card elevation
+                            color: Colors.white, // Transparent card background
+                            child: Column(children: [
+                              ListTile(
                                 trailing: CircleAvatar(
-                                    backgroundImage: AssetImage("img/quran.jpg"),
-                                  ),
-                                  title: Align(
-                                    alignment: Alignment.topRight,
-                                    child: Text(
-                                      'غلا بن بشر',
-                                    ),
-                                  ),
-                                    subtitle: Align(
-                                    alignment: Alignment.topRight,
-                                    child: Text(
-                                      // '${DateFormat('dd/MM/yyyy').format(DateTime.now())}',
-                                      "2/2/2020",
-                                    ),
-                                  ),
-                              leading: PopupMenuButton<String>(
-                                onSelected: (value) {
-                                  if (value == 'edit') {
-                                    _showAddNotificationDialog(
-                                      notification: notification,
-                                      index: index,
-                                    );
-                                  } else if (value == 'delete') {
-                                    _deleteNotification(index);
-                                  }
-                                },
-                                itemBuilder: (context) => [
-                                  PopupMenuItem<String>(
-                                    value: 'edit',
-                                    child: Text('Edit'),
-                                  ),
-                                  PopupMenuItem<String>(
-                                    value: 'delete',
-                                    child: Text('Delete'),
-                                  ),
-                                ],
-                              ), // Three dots on the left side
-
-                              // Timestamp on the top left corner
-                            ),
-                            
-
-                            Column(
-                              children: [
-                                Center(
+                                  backgroundImage: AssetImage("img/quran.jpg"),
+                                ),
+                                title: Align(
+                                  alignment: Alignment.topRight,
                                   child: Text(
-                                    notification['title'],
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.05, // Adjust font size
-                                    ),
+                                    'غلا بن بشر',
                                   ),
                                 ),
+                                subtitle: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    // '${DateFormat('dd/MM/yyyy').format(DateTime.now())}',
+                                    "2/2/2020",
+                                  ),
+                                ),
+                                leading: PopupMenuButton<String>(
+                                  onSelected: (value) {
+                                    if (value == 'edit') {
+                                      _showAddNotificationDialog(
+                                        notification: notification,
+                                        index: index,
+                                      );
+                                    } else if (value == 'delete') {
+                                      _deleteNotification(index);
+                                    }
+                                  },
+                                  itemBuilder: (context) => [
+                                    PopupMenuItem<String>(
+                                      value: 'edit',
+                                      child: Text('Edit'),
+                                    ),
+                                    PopupMenuItem<String>(
+                                      value: 'delete',
+                                      child: Text('Delete'),
+                                    ),
+                                  ],
+                                ), // Three dots on the left side
+
+                                // Timestamp on the top left corner
+                              ),
+                              Column(
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      "الدرس:${notification['title']}",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.05, // Adjust font size
+                                      ),
+                                    ),
+                                  ),
                                   Divider(
-                                  color: Colors.grey.shade700,
-                                  height: 5,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  notification['content'],
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.right,
-                                ),
+                                    color: Colors.grey.shade700,
+                                    height: 5,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    notification['content'],
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.right,
+                                  ),
                                   SizedBox(
-                                  height: 10,
-                                ),
-                              
-
-                              ],
-                            ),
-
-                            
-          ])    ))],
+                                    height: 10,
+                                  ),
+                                  Padding(padding:  
+                                                  const EdgeInsets.all(16.0),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  ElevatedButton(
+                                                    onPressed: () => launchUrl(
+                                                        videoUrl), // Open YouTube link
+                                                    child: const Text('يوتيوب'),
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () {},
+                                                    // Open YouTube link
+                                                    child:
+                                                        const Text('عرض ملف'),
+                                                  ),
+                                                ],
+                                              ),)
+                                ],
+                              ),
+                            ])))
+                  ],
                 );
               },
             )),
@@ -240,6 +265,7 @@ class AddNotificationDialog extends StatefulWidget {
 
 class _AddNotificationDialogState extends State<AddNotificationDialog> {
   final _titleController = TextEditingController();
+  final _urlController = TextEditingController();
   final _contentController = TextEditingController();
   DateTime _deadline = DateTime.now();
   String? _attachedFile;
@@ -312,7 +338,7 @@ class _AddNotificationDialogState extends State<AddNotificationDialog> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
+      onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Container(
@@ -339,7 +365,7 @@ class _AddNotificationDialogState extends State<AddNotificationDialog> {
                 key: _formKey,
                 child: SingleChildScrollView(
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Divider(
                         thickness: 1.2,
@@ -349,10 +375,9 @@ class _AddNotificationDialogState extends State<AddNotificationDialog> {
                         height: 10,
                       ),
                       Padding(
-                      padding: EdgeInsets.only(right: 15),
+                        padding: EdgeInsets.only(right: 15),
                         child: const Text(
                           "الدرس",
-                          
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -368,13 +393,13 @@ class _AddNotificationDialogState extends State<AddNotificationDialog> {
                             color: Colors.grey.shade200,
                             borderRadius: BorderRadius.circular(8)),
                         child: TextFormField(
-                            textAlign: TextAlign.right,
+                          textAlign: TextAlign.right,
                           controller: _titleController,
                           decoration: InputDecoration(
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none,
                             hintText: "عنوان الدرس",
-                              alignLabelWithHint: true,
+                            alignLabelWithHint: true,
                           ),
                           maxLines: 1,
                           validator: (value) {
@@ -385,14 +410,12 @@ class _AddNotificationDialogState extends State<AddNotificationDialog> {
                           },
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Padding(
-                      padding: EdgeInsets.only(right: 15),
+                      
+                    
+                            Padding(
+                        padding: EdgeInsets.only(right: 15),
                         child: Text(
                           "الشرح",
-                        
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -408,12 +431,12 @@ class _AddNotificationDialogState extends State<AddNotificationDialog> {
                               color: Colors.grey.shade200,
                               borderRadius: BorderRadius.circular(8)),
                           child: TextFormField(
-                              textAlign: TextAlign.right,
+                            textAlign: TextAlign.right,
                             controller: _contentController,
                             decoration: InputDecoration(
                               enabledBorder: InputBorder.none,
                               focusedBorder: InputBorder.none,
-                                alignLabelWithHint: true,
+                              alignLabelWithHint: true,
                               hintText: "محتوى الشرح",
                             ),
                             maxLines: 5,
@@ -423,6 +446,36 @@ class _AddNotificationDialogState extends State<AddNotificationDialog> {
                               }
                               return null; // Input is valid
                             },
+                          )),
+                            Padding(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Text(
+                          "اضف الرابط",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: TextFormField(
+                            textAlign: TextAlign.right,
+                            controller: _urlController,
+                            decoration: InputDecoration(
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              alignLabelWithHint: true,
+                              hintText: "الرابط",
+                            ),
+                            maxLines: 5,
+                          
                           )),
                       ListTile(
                         title: Text(_attachedFile != null

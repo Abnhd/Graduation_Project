@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
         
         
-          home:lesson(),
+          home:diary(),
         ));  
   } 
 
